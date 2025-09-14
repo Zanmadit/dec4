@@ -8,7 +8,6 @@ from model import RouteModel
 df = pd.read_parquet("reconstructed.parquet")
 app = FastAPI()
 
-# Загружаем датафрейм
 with open("route_model.pkl", "rb") as f:
     model: RouteModel = dill.load(f)
 
@@ -26,7 +25,7 @@ def form():
 @app.post("/map", response_class=HTMLResponse)
 def show_map(user_id: str = Form(...)):
     try:
-        user_id = int(user_id)  # привели строку формы к int
+        user_id = int(user_id) 
     except ValueError:
         return f"<h3>Неверный формат ID: {user_id}</h3>"
 
